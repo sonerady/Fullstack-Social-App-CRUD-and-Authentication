@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { updateMemory, fetchMemory } from "../axios/index.js";
 
-const UpdateMemory = (id) => {
+const UpdateMemory = ({ id }) => {
   const [memoryData, setMemoryData] = useState({
     title: "",
     content: "",
@@ -22,7 +22,7 @@ const UpdateMemory = (id) => {
       setMemoryData(data);
     };
     getMemo();
-  }, [id, memoryData]);
+  }, [id]);
 
   return (
     <>
@@ -35,7 +35,7 @@ const UpdateMemory = (id) => {
         }}
       >
         <Form.Group>
-          <h1>{memoryData.title}</h1>
+          <h1>Update Memo</h1>
         </Form.Group>
 
         <Form.Group>
