@@ -2,7 +2,7 @@ import React from "react";
 import ReactFileBase64 from "react-file-base64";
 import { Form, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import useHistory from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { updateMemory, fetchMemory } from "../axios/index.js";
 
@@ -14,15 +14,16 @@ const UpdateMemory = (id) => {
     image: "",
   });
 
+  const history = useHistory();
+
   useEffect(() => {
     const getMemo = async () => {
       const { data } = await fetchMemory(id);
       setMemoryData(data);
     };
     getMemo();
-  }, [id]);
+  }, [id, memoryData]);
 
-  const history = useHistory();
   return (
     <>
       <Form
@@ -34,7 +35,7 @@ const UpdateMemory = (id) => {
         }}
       >
         <Form.Group>
-          <h1>Update Memory</h1>
+          <h1>{memoryData.title}</h1>
         </Form.Group>
 
         <Form.Group>
@@ -45,6 +46,7 @@ const UpdateMemory = (id) => {
             onChange={(e) =>
               setMemoryData({ ...memoryData, title: e.target.value })
             }
+            value={memoryData.title}
           ></Form.Control>
         </Form.Group>
 
@@ -56,6 +58,7 @@ const UpdateMemory = (id) => {
             onChange={(e) =>
               setMemoryData({ ...memoryData, creator: e.target.value })
             }
+            value={memoryData.creator}
           ></Form.Control>
         </Form.Group>
 
@@ -69,6 +72,7 @@ const UpdateMemory = (id) => {
             onChange={(e) =>
               setMemoryData({ ...memoryData, content: e.target.value })
             }
+            value={memoryData.content}
           ></Form.Control>
         </Form.Group>
 
@@ -79,6 +83,7 @@ const UpdateMemory = (id) => {
             onDone={({ base64 }) => {
               setMemoryData({ ...memoryData, image: base64 });
             }}
+            value={memoryData.image}
           />
         </Form.Group>
         <Button type="submit" block>

@@ -24,7 +24,10 @@ const Memory = ({ memory }) => {
           alignItems: "center",
         }}
       >
-        <LinkContainer to="/create" style={{ cursor: "pointer" }}>
+        <LinkContainer
+          to={`/update/${memory._id}`}
+          style={{ cursor: "pointer" }}
+        >
           <BiEdit size={20} color="white" />
         </LinkContainer>
         <MdDeleteOutline
