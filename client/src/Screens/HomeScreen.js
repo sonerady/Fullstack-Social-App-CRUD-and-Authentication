@@ -9,11 +9,10 @@ import { fetchMemory } from "../axios/index.js";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-
   const memories = useSelector((state) => state.memories);
 
   useEffect(() => {
-    dispatch(fetchMemories());
+    !memories[0] ? dispatch(fetchMemories()) : console.log("başarısız.");
   }, [dispatch]);
 
   return (

@@ -4,7 +4,10 @@ import { Form, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import { updateMemory, fetchMemory } from "../axios/index.js";
+import { updateMemory } from "../actions/memoryActions";
+import { useDispatch } from "react-redux";
+
+import { fetchMemory } from "../axios/index.js";
 
 const UpdateMemory = ({ id }) => {
   const [memoryData, setMemoryData] = useState({
@@ -14,13 +17,15 @@ const UpdateMemory = ({ id }) => {
     image: "",
   });
 
-  const history = useHistory();
+  const dispatch = useDispatch();
 
+  const history = useHistory();
   useEffect(() => {
     const getMemo = async () => {
       const { data } = await fetchMemory(id);
       setMemoryData(data);
     };
+
     getMemo();
   }, [id]);
 
@@ -30,7 +35,7 @@ const UpdateMemory = ({ id }) => {
         onSubmit={(e) => {
           e.preventDefault();
 
-          updateMemory(id, memoryData);
+          dispatch(updateMemory(id, memoryData));
           history.push("/");
         }}
       >

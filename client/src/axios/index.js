@@ -12,11 +12,10 @@ export const fetchMemory = async (id) => await API.get(`/memories/${id}`);
 
 //-----POST MEMORIES
 
-export const createMemory = async (newMemory) => {
+export const createMemory = async (newMemory) =>
   await API.post("/memories", newMemory);
-  //   const { data } = await API.post("/memories", newMemory);
-  //   console.log(data); bu şekilde de yazılabilir. amaç sadece konsola yazdırmak.
-};
+//   const { data } = await API.post("/memories", newMemory);
+//   console.log(data); bu şekilde de yazılabilir. amaç sadece konsola yazdırmak.
 
 //-----UPDATE MEMORIES
 
